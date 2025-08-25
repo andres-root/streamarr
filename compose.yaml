@@ -88,6 +88,37 @@ services:
     networks:
       - media-network
 
+  jellyseerr:
+    image: fallenbagel/jellyseerr:latest
+    container_name: jellyseerr
+    environment:
+      - LOG_LEVEL=debug
+      - TZ=${TZ}
+    volumes:
+      - ./config/jellyseerr:/app/config
+    ports:
+      - 5055:5055
+    restart: unless-stopped
+    networks:
+      - media-network
+
+  bazarr:
+    image: lscr.io/linuxserver/bazarr:latest
+    container_name: bazarr
+    environment:
+      - PUID=${PUID}
+      - PGID=${PGID}
+      - TZ=${TZ}
+    volumes:
+      - ./config/bazarr:/config
+      - /home/andres/media/pelis:/movies
+      - /home/andres/media/series:/tv
+    ports:
+      - 6767:6767
+    restart: unless-stopped
+    networks:
+      - media-network
+
 networks:
   media-network:
     driver: bridge

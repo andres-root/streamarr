@@ -26,6 +26,8 @@ Streamarr is a complete media server solution that combines several powerful app
 - **🎬 Radarr**: Automatically finds and downloads movies
 - **⬇️ qBittorrent**: Secure torrent download client
 - **🔍 Prowlarr**: Manages all your torrent sources in one place
+- **🎭 Jellyseerr**: Request management - users can request movies and TV shows
+- **💬 Bazarr**: Subtitle management - automatically downloads subtitles
 
 Everything works together automatically: search for content → download → organize → stream!
 
@@ -37,6 +39,8 @@ Everything works together automatically: search for content → download → org
 - 🔒 **Secure**: Isolated Docker network with proper permissions
 - 📱 **Mobile friendly**: Access from any device
 - 🌍 **Multi-language**: Supports multiple languages and timezones
+- 🎭 **Request system**: Users can request content via Jellyseerr
+- 💬 **Subtitles**: Automatic subtitle downloads in multiple languages
 - 🔧 **Customizable**: Easy to modify and extend
 
 ## 📋 Prerequisites
@@ -55,7 +59,7 @@ Before you start, make sure you have:
 
 ### Network Requirements
 - **Internet connection** for downloading content
-- **Available ports**: 8096, 8989, 7878, 8080, 9696
+- **Available ports**: 8096, 8989, 7878, 8080, 9696, 5055, 6767
 
 ## 🚀 Quick Start
 
@@ -141,6 +145,8 @@ The setup script will create all necessary directories and configuration files:
 - Radarr: http://localhost:7878
 - qBittorrent: http://localhost:8080
 - Prowlarr: http://localhost:9696
+- Jellyseerr: http://localhost:5055
+- Bazarr: http://localhost:6767
 
 ## ⚙️ Configuration
 
@@ -177,7 +183,7 @@ Your setup will create this structure:
 
 ```
 streamarr/
-├── config/          # Service configurations
+├── config/          # Service configurations (jellyfin, sonarr, radarr, etc.)
 ├── cache/           # Temporary cache files  
 ├── downloads/       # Downloaded files
 ├── scripts/         # Automation scripts
@@ -236,17 +242,50 @@ After starting services, you need to configure each application:
    - Root Folder: `/movies`
    - Enable "Rename Movies"
 
+### 6. Jellyseerr Setup (Request Management)
+1. Open http://localhost:5055
+2. Sign in with your Jellyfin account
+3. Configure Jellyfin server:
+   - Server: `http://jellyfin:8096`
+   - Use your Jellyfin admin credentials
+4. Configure Sonarr/Radarr:
+   - Go to **Settings** → **Services**
+   - Add Sonarr: `http://sonarr:8989`
+   - Add Radarr: `http://radarr:7878`
+   - Use API keys from respective services
+
+### 7. Bazarr Setup (Subtitle Management)
+1. Open http://localhost:6767
+2. Go to **Settings** → **Sonarr**:
+   - Address: `sonarr`
+   - Port: `8989`
+   - API Key: (from Sonarr)
+3. Go to **Settings** → **Radarr**:
+   - Address: `radarr`
+   - Port: `7878`
+   - API Key: (from Radarr)
+4. Configure subtitle providers:
+   - **Settings** → **Providers**
+   - Enable OpenSubtitles, Subscene, etc.
+   - Configure languages
+
 ## 🎯 Usage
 
 ### Adding Content
 
-**TV Shows (Sonarr):**
+**Request via Jellyseerr (Recommended):**
+1. Open Jellyseerr: http://localhost:5055
+2. Search for movies or TV shows
+3. Click **Request**
+4. Content automatically adds to Sonarr/Radarr and downloads
+
+**Direct via Sonarr (TV Shows):**
 1. Go to **Series** → **Add New Series**
 2. Search for your show
 3. Choose quality profile and root folder
 4. **Add Series** - it will search and download automatically!
 
-**Movies (Radarr):**
+**Direct via Radarr (Movies):**
 1. Go to **Movies** → **Add New Movie**
 2. Search for your movie
 3. Choose quality profile and root folder  
@@ -263,6 +302,8 @@ After starting services, you need to configure each application:
 - **qBittorrent**: http://localhost:8080 - See active downloads
 - **Prowlarr**: http://localhost:9696 - Test search results
 - **Sonarr/Radarr**: Check "Activity" tab for import progress
+- **Jellyseerr**: http://localhost:5055 - View request status
+- **Bazarr**: http://localhost:6767 - Monitor subtitle downloads
 
 ## 🛠️ Troubleshooting
 
@@ -395,6 +436,8 @@ Built with amazing open-source projects:
 - [Radarr](https://radarr.video/)
 - [qBittorrent](https://www.qbittorrent.org/)
 - [Prowlarr](https://prowlarr.com/)
+- [Jellyseerr](https://github.com/Fallenbagel/jellyseerr)
+- [Bazarr](https://www.bazarr.media/)
 - [LinuxServer.io](https://www.linuxserver.io/) Docker images
 
 ---

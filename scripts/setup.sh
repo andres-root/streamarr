@@ -39,7 +39,7 @@ fi
 echo "📁 Creating required directories..."
 
 # Config directories
-mkdir -p config/{jellyfin,sonarr,radarr,qbittorrent,prowlarr}
+mkdir -p config/{jellyfin,sonarr,radarr,qbittorrent,prowlarr,jellyseerr,bazarr}
 echo "✅ Config directories created"
 
 # Downloads directories
@@ -91,3 +91,5 @@ echo "   - Sonarr: http://localhost:8989"
 echo "   - Radarr: http://localhost:7878"
 echo "   - qBittorrent: http://localhost:8080"
 echo "   - Prowlarr: http://localhost:9696"
+echo "   - Jellyseerr: http://localhost:5055"
+echo "   - Bazarr: http://localhost:6767"
