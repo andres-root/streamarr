@@ -1,0 +1,38 @@
+# Environment variables (may contain sensitive data)
+.env
+
+# Configuration directories (contain service configs and databases)
+config/
+
+# Cache directory (temporary files)
+cache/
+
+# Downloads directory (temporary download files)
+downloads/
+
+# Log files
+*.log
+logs/
+
+# Docker volumes data
+data/
+
+# Backup files
+*.backup
+*.bak
+
+# OS generated files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# Editor files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
