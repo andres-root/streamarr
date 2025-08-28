@@ -119,6 +119,19 @@ services:
     networks:
       - media-network
 
+  flaresolverr:
+    image: ghcr.io/flaresolverr/flaresolverr:latest
+    container_name: flaresolverr
+    environment:
+      - LOG_LEVEL=info
+      - LOG_HTML=false
+      - CAPTCHA_SOLVER=none
+    ports:
+      - 8191:8191
+    restart: unless-stopped
+    networks:
+      - media-network
+
 networks:
   media-network:
     driver: bridge

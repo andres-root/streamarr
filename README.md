@@ -28,6 +28,7 @@ Streamarr is a complete media server solution that combines several powerful app
 - **🔍 Prowlarr**: Manages all your torrent sources in one place
 - **🎭 Jellyseerr**: Request management - users can request movies and TV shows
 - **💬 Bazarr**: Subtitle management - automatically downloads subtitles
+- **🔄 FlareSolverr**: Bypasses Cloudflare protection on torrent sites
 
 Everything works together automatically: search for content → download → organize → stream!
 
@@ -59,7 +60,7 @@ Before you start, make sure you have:
 
 ### Network Requirements
 - **Internet connection** for downloading content
-- **Available ports**: 8096, 8989, 7878, 8080, 9696, 5055, 6767
+- **Available ports**: 8096, 8989, 7878, 8080, 9696, 5055, 6767, 8191
 
 ## 🚀 Quick Start
 
@@ -147,6 +148,7 @@ The setup script will create all necessary directories and configuration files:
 - Prowlarr: http://localhost:9696
 - Jellyseerr: http://localhost:5055
 - Bazarr: http://localhost:6767
+- FlareSolverr: http://localhost:8191
 
 ## ⚙️ Configuration
 
@@ -269,6 +271,15 @@ After starting services, you need to configure each application:
    - Enable OpenSubtitles, Subscene, etc.
    - Configure languages
 
+### 8. FlareSolverr Setup (Cloudflare Bypass)
+1. FlareSolverr runs automatically - no web interface needed
+2. Configure in Prowlarr:
+   - Go to **Settings** → **Indexers** → **Add Indexer**
+   - For indexers that need Cloudflare bypass, set:
+     - **FlareSolverr URL**: `http://flaresolverr:8191/v1`
+   - Save and test indexers
+3. **Note**: FlareSolverr helps access protected torrent sites automatically
+
 ## 🎯 Usage
 
 ### Adding Content
@@ -304,6 +315,7 @@ After starting services, you need to configure each application:
 - **Sonarr/Radarr**: Check "Activity" tab for import progress
 - **Jellyseerr**: http://localhost:5055 - View request status
 - **Bazarr**: http://localhost:6767 - Monitor subtitle downloads
+- **FlareSolverr**: http://localhost:8191 - Check proxy service status
 
 ## 🛠️ Troubleshooting
 
@@ -438,6 +450,7 @@ Built with amazing open-source projects:
 - [Prowlarr](https://prowlarr.com/)
 - [Jellyseerr](https://github.com/Fallenbagel/jellyseerr)
 - [Bazarr](https://www.bazarr.media/)
+- [FlareSolverr](https://github.com/FlareSolverr/FlareSolverr)
 - [LinuxServer.io](https://www.linuxserver.io/) Docker images
 
 ---
